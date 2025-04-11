@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mood Advice</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #eef2f3;
+      text-align: center;
+      padding: 40px;
+    }
+    .container {
+      background-color: white;
+      padding: 30px;
+      max-width: 600px;
+      margin: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .tip {
+      background-color: #e0f7fa;
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 10px;
+      border-left: 5px solid #00796b;
+      font-size: 18px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Here's something to help you</h2>
+    <div class="tip" id="tipBox">Click below to see advice.</div>
+    <button onclick="showTip()">Show Advice</button>
+    <br>
+<button onclick="goToSummary()">→</button>
+  </div>
+
+  <script>
+    const moodTips = {
+      "Happy": ["Stay cheerful!", "Share your joy with someone."],
+      "Sad": ["It's okay to feel sad.", "Talk to a friend or take a rest."],
+      "Anxious": ["Breathe deeply.", "Try grounding yourself with your senses."],
+      "Angry": ["Take a walk.", "Release tension by drawing or writing."],
+      "Calm": ["Enjoy this peace.", "Do something relaxing today."],
+      "Other": ["Thank you for sharing your feelings."]
+    };
+
+    function showTip() {
+      const data = JSON.parse(localStorage.getItem("moodData")) || [];
+      const last = data[data.length - 1];
+      const mood = last?.mood || "Other";
+      const tips = moodTips[mood] || moodTips["Other"];
+      const randomTip = tips[Math.floor(Math.random() * tips.length)];
+      document.getElementById("tipBox").textContent = randomTip;
+    }
+    function goToSummary() {
+  window.location.href = "summary.html";
+}
+  </script>
+</body>
+</html>
