@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mood Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      text-align: center;
+      padding: 40px;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    select, input, textarea, button {
+      margin-top: 10px;
+      width: 90%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Track Your Mood</h2>
+    <select id="mood">
+      <option value="">Select Mood</option>
+      <option value="Happy">Happy</option>
+      <option value="Sad">Sad</option>
+      <option value="Anxious">Anxious</option>
+      <option value="Angry">Angry</option>
+      <option value="Calm">Calm</option>
+    </select><br><br>
+
+    <label for="rating">Mood Rating (1-10):</label><br>
+    <input type="number" id="rating" min="1" max="10"><br><br>
+
+    <label for="notes">Write your feelings:</label><br>
+    <textarea id="notes" rows="4" placeholder="Type here..."></textarea><br>
+
+    <button onclick="saveAndGo()">Next</button>
+  </div>
+
+  <script>
+    function saveAndGo() {
+      const mood = document.getElementById("mood").value;
+      const rating = document.getElementById("rating").value;
+      const notes = document.getElementById("notes").value;
+
+      if (!mood) {
+        alert("Please select a mood!");
+        return;
+      }
+
+      const today = new Date().toISOString().split('T')[0];
+      const moodEntry = {
+        date: today,
+        mood,
+        rating,
+        notes
+      };
+
+      let moodData = JSON.parse(localStorage.getItem("moodData")) || [];
+      moodData.push(moodEntry);
+      localStorage.setItem("moodData", JSON.stringify(moodData));
+
+      window.location.href = "advice.html";
+    }
+  </script>
+</body>
+</html>
