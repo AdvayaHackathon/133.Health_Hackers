@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Set Reminders - MindMate</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fdf6f0;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 500px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      padding: 30px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+      color: #444;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background-color: #f3a683;
+      border: none;
+      border-radius: 15px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .saved-msg {
+      text-align: center;
+      color: green;
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 id="title">Set Your Self-Care Reminder</h2>
+
+    <label id="timeLabel">Select Time:</label>
+    <input type="time" id="reminderTime"/>
+
+    <label id="taskLabel">Choose Activity:</label>
+    <select id="activityType">
+      <option value="checkin">Check-In</option>
+      <option value="journal">Journal</option>
+      <option value="breathe">Breathing Exercise</option>
+      <option value="quote">Motivational Quote</option>
+    </select>
+
+    <label id="msgLabel">Custom Message (optional):</label>
+    <textarea id="customMessage" rows="2" placeholder="Type a short note..."></textarea>
+
+    <label id="repeatLabel">Repeat:</label>
+    <select id="repeatType">
+      <option value="daily">Daily</option>
+      <option value="weekdays">Weekdays</option>
+      <option value="weekends">Weekends</option>
+    </select>
+
+    <button onclick="saveReminder()">Save Reminder</button>
+    <div class="saved-msg" id="savedMsg">Reminder Saved!</div>
+  </div>
+
+  <script>
+    const translations = {
+      en: {
+        title: "Set Your Self-Care Reminder",
+        timeLabel: "Select Time:",
+        taskLabel: "Choose Activity:",
+        msgLabel: "Custom Message (optional):",
+        repeatLabel: "Repeat:",
+        saveBtn: "Save Reminder",
+        saved: "Reminder Saved!"
+      },
+      kn: {
+        title: "ನಿಮ್ಮ ಆತ್ಮಪಾಲನಾ ನೆನಪುಸೇರಿಸಿ",
+        timeLabel: "ಸಮಯ ಆಯ್ಕೆಮಾಡಿ:",
+        taskLabel: "ಚಟುವಟಿಕೆ ಆಯ್ಕೆಮಾಡಿ:",
+        msgLabel: "ವೈಯಕ್ತಿಕ ಸಂದೇಶ (ಐಚ್ಛಿಕ):",
+        repeatLabel: "ಪುನರಾವರ್ತಿಸಿ:",
+        saveBtn: "ನೆನಪು ಉಳಿಸಿ",
+        saved: "ನೆನಪು ಉಳಿಸಲಾಗಿದೆ!"
+      },
+      te: {
+        title: "మీ సెల్ఫ్-కేర్ రిమైండర్‌ను సెట్ చేయండి",
+        timeLabel: "సమయాన్ని ఎంచుకోండి:",
+        taskLabel: "చర్యను ఎంచుకోండి:",
+        msgLabel: "కస్టమ్ సందేశం (ఐచ్ఛికం):",
+        repeatLabel: "పునరావృతం:",
+        saveBtn: "రిమైండర్ సేవ్ చేయండి",
+        saved: "రిమైండర్ సేవ్ చేయబడింది!"
+      },
+      fr: {
+        title: "Définissez votre rappel bien-être",
+        timeLabel: "Sélectionnez l'heure:",
+        taskLabel: "Choisissez l'activité:",
+        msgLabel: "Message personnalisé (facultatif):",
+        repeatLabel: "Répéter:",
+        saveBtn: "Enregistrer le rappel",
+        saved: "Rappel enregistré !"
+      },
+      ta: {
+        title: "உங்கள் சுய பராமரிப்பு நினைவூட்டலை அமைக்கவும்",
+        timeLabel: "நேரத்தைத் தேர்வுசெய்க:",
+        taskLabel: "செயல்பாட்டைத் தேர்வுசெய்க:",
+        msgLabel: "தனிப்பயன் செய்தி (விருப்பத்தேர்வு):",
+        repeatLabel: "மீண்டும் செய்யவும்:",
+        saveBtn: "நினைவூட்டலை சேமிக்கவும்",
+        saved: "நினைவூட்டல் சேமிக்கப்பட்டது!"
+      },
+      ko: {
+        title: "셀프 케어 리마인더 설정",
+        timeLabel: "시간 선택:",
+        taskLabel: "활동 선택:",
+        msgLabel: "맞춤 메시지 (선택 사항):",
+        repeatLabel: "반복:",
+        saveBtn: "리마인더 저장",
+        saved: "리마인더가 저장되었습니다!"
+      }
+    };
+
+    function setLanguage() {
+      const lang = localStorage.getItem('language') || 'en';
+      const t = translations[lang];
+      document.getElementById('title').textContent = t.title;
+      document.getElementById('timeLabel').textContent = t.timeLabel;
+      document.getElementById('taskLabel').textContent = t.taskLabel;
+      document.getElementById('msgLabel').textContent = t.msgLabel;
+      document.getElementById('repeatLabel').textContent = t.repeatLabel;
+      document.querySelector('button').textContent = t.saveBtn;
+      document.getElementById('savedMsg').textContent = t.saved;
+    }
+
+    function saveReminder() {
+      const time = document.getElementById('reminderTime').value;
+      const activity = document.getElementById('activityType').value;
+      const msg = document.getElementById('customMessage').value;
+      const repeat = document.getElementById('repeatType').value;
+
+      const reminder = {
+        time, activity, msg, repeat
+      };
+      localStorage.setItem('mindmate_reminder', JSON.stringify(reminder));
+      document.getElementById('savedMsg').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('savedMsg').style.display = 'none';
+      }, 3000);
+    }
+
+    window.onload = setLanguage;
+  </script>
+</body>
+</html>

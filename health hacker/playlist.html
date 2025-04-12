@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MindMate - Playlist</title>
+  <style>
+    body {
+      background-color: #f8ede8;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 30px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #6b4a3f;
+      margin-bottom: 25px;
+    }
+
+    .playlist-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 0 20px;
+    }
+
+    .track {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .track h4 {
+      color: #5c3c2e;
+      margin-bottom: 10px;
+    }
+
+    audio {
+      width: 100%;
+    }
+
+    .btn {
+      margin-top: 40px;
+      background-color: #c69884;
+      color: white;
+      padding: 12px 28px;
+      border: none;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #ad7e6c;
+    }
+  </style>
+</head>
+<body>
+  <h2 id="playlistHeading">Relaxing Playlist</h2>
+
+  <div class="playlist-container" id="playlistContainer">
+    <div class="track">
+      <h4>Peaceful Morning</h4>
+      <audio controls>
+        <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+    <div class="track">
+      <h4>Calm Breeze</h4>
+      <audio controls>
+        <source src="https://www.bensound.com/bensound-music/bensound-relaxing.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+    <div class="track">
+      <h4>Serenity</h4>
+      <audio controls>
+        <source src="https://www.bensound.com/bensound-music/bensound-memories.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+    <div class="track">
+      <h4>Dreamy Flow</h4>
+      <audio controls>
+        <source src="https://www.bensound.com/bensound-music/bensound-dreams.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+    <div class="track">
+      <h4>Gentle Harmony</h4>
+      <audio controls>
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+    <div class="track">
+      <h4>Quiet Nights</h4>
+      <audio controls>
+        <source src="https://www.bensound.com/bensound-music/bensound-tomorrow.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+    <div class="track">
+      <h4>Stillness</h4>
+      <audio controls>
+        <source src="https://www.bensound.com/bensound-music/bensound-sweet.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </div>
+
+  <button class="btn" onclick="goToNext()">Next</button>
+
+  <script>
+    const lang = localStorage.getItem("selectedLanguage") || "en";
+
+    const translations = {
+      en: "Relaxing Playlist",
+      kn: "ಆರಾಮದಾಯಕ ಪ್ಲೇಲಿಸ್ಟ್",
+      te: "ఆరామదాయకమైన ప్లేలిస్ట్",
+      ta: "இணைசெய்யும் இசைப்பட்டியல்",
+      ko: "편안한 재생 목록",
+      fr: "Playlist relaxante"
+    };
+
+    document.getElementById("playlistHeading").innerText = translations[lang] || translations["en"];
+
+    function goToNext() {
+      window.location.href = "videos.html";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MindMate - Personalized Tips</title>
+  <style>
+    body {
+      background-color: #fff6f0;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+      color: #5e3c2d;
+    }
+    h2 {
+      text-align: center;
+      color: #875e4a;
+      margin-bottom: 20px;
+    }
+    .section {
+      background-color: #f9ece2;
+      padding: 20px;
+      margin: 15px auto;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin: 10px 0 6px;
+      font-weight: 600;
+    }
+    button, select {
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 15px;
+      border: none;
+      border-radius: 8px;
+      background-color: #d0a08b;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #b77e68;
+    }
+  </style>
+</head>
+<body>  <h2 id="tipHeading">Here are your personalized tips</h2>  <div class="section" id="emotionTip"></div>  <div class="section">
+    <label id="speechLabel">Do you want motivational speech?</label>
+    <select id="speechChoice">
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+    <button onclick="gotoSpeech()">Next</button>
+  </div>  <div class="section">
+    <label id="breathingLabel">Try a breathing exercise?</label>
+    <button onclick="window.location.href='breathing.html'">Start</button>
+  </div>  <div class="section">
+    <label id="musicLabel">Want to listen to some music?</label>
+    <button onclick="window.location.href='playlist.html'">Go to Playlist</button>
+  </div>  <div class="section">
+    <label id="youtubeLabel">Watch videos that match your mood?</label>
+    <button onclick="window.location.href='videos.html'">Show Videos</button>
+  </div>  <div class="section">
+    <label id="timerLabel">Start inhale/exhale counter?</label>
+    <button onclick="window.location.href='timer.html'">Open Timer</button>
+  </div>  <div class="section">
+    <label id="stretchLabel">Try writing your journal?</label>
+    <button onclick="window.location.href='journal.html'">Start writing</button>
+  </div>  <div class="section">
+    <label id="funnyLabel">Need something funny?</label>
+    <button onclick="window.location.href='funny.html'">Make Me Laugh</button>
+  </div>  <script>
+    const translations = {
+      en: {
+        tipHeading: "Here are your personalized tips",
+        speechLabel: "Do you want motivational speech?",
+        breathingLabel: "Try a breathing exercise?",
+        musicLabel: "Want to listen to some music?",
+        youtubeLabel: "Watch videos that match your mood?",
+        timerLabel: "Start inhale/exhale counter?",
+        stretchLabel: "Try writing your journal?",
+        funnyLabel: "Need something funny?",
+        emotionTips: {
+          Happy: "Keep spreading joy! Engage in creative activities or social time. Share your happiness with others—it’s contagious. Write a gratitude note to yourself. Capture this moment in a journal or photo. Spend time in nature or enjoy your favorite hobby. Celebrate even the little wins today.",
+          Sad: "It's okay to feel sad. Try listening to uplifting music or journaling. Reach out to someone you trust and talk about your feelings. Avoid bottling emotions—express them healthily. Take a short walk to shift your energy. A warm shower or cup of tea can also help soothe you.",
+          Angry: "Deep breaths help. Consider the breathing exercise or stretching. Channel your energy into something creative like art or music. Avoid making big decisions right now. Step outside for fresh air. Acknowledge your anger without judgment and let it pass.",
+          Anxious: "A calm playlist or focused breathing can be very helpful. Break your tasks into small steps. Avoid caffeine or sugary snacks. Use positive affirmations to reframe worries. Talk to someone who helps you feel grounded. Movement like walking can ease anxiety.",
+          Calm: "Maintain the peace—meditation or calm music is great! Enjoy this serenity by staying present. Do something that brings you joy. Reflect on what contributes to this calm. Share your peace with others who might need it. Write down what you’re grateful for.",
+          None: "Reflect on your feelings—writing them down helps. Explore your current state without pressure. Try grounding activities like touch or sound. Allow space for whatever emotion may arise. Engage your senses—smell, sound, taste. Take a few minutes to stretch or walk."
+        }
+      },
+      kn: {},
+      te: {},
+      ta: {},
+      ko: {},
+      fr: {}
+    };
+
+    const lang = localStorage.getItem("language") || "en";
+    const emotion = (JSON.parse(localStorage.getItem("dailyCheckIn")) || {}).emotion || "None";
+
+    function setTextContent(id, text) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = text;
+    }
+
+    const t = translations[lang] || translations["en"];
+
+    setTextContent("tipHeading", t.tipHeading);
+    setTextContent("speechLabel", t.speechLabel);
+    setTextContent("breathingLabel", t.breathingLabel);
+    setTextContent("musicLabel", t.musicLabel);
+    setTextContent("youtubeLabel", t.youtubeLabel);
+    setTextContent("timerLabel", t.timerLabel);
+    setTextContent("stretchLabel", t.stretchLabel);
+    setTextContent("funnyLabel", t.funnyLabel);
+
+    document.getElementById("emotionTip").innerText = t.emotionTips?.[emotion] || t.emotionTips["None"];
+
+    function gotoSpeech() {
+      if (document.getElementById("speechChoice").value === "yes") {
+        window.location.href = "motivation.html";
+      }
+    }
+  </script></body>
+</html>
