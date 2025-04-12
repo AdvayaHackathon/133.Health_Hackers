@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>You Are Not Alone</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5ece4;
+      color: #3e3b36;
+    }
+
+    header {
+      text-align: center;
+      background-color: #e7d6ca;
+      padding: 2em 1em 1em;
+      font-size: 2em;
+      font-weight: bold;
+    }
+
+    .content {
+      max-width: 700px;
+      margin: auto;
+      padding: 2em;
+      text-align: center;
+    }
+
+    .content p {
+      font-size: 1.1em;
+      line-height: 1.6;
+      margin-bottom: 2em;
+    }
+
+    .helplines {
+      background-color: #fff9f3;
+      border: 1px solid #ddcfc3;
+      border-radius: 12px;
+      padding: 1.5em;
+      margin: 2em auto;
+      box-shadow: 2px 4px 10px rgba(0,0,0,0.05);
+      text-align: left;
+    }
+
+    .helplines h3 {
+      margin-top: 0;
+    }
+
+    .helplines ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .helplines li {
+      margin: 0.8em 0;
+    }
+
+    .buttons {
+      margin-top: 2em;
+      display: flex;
+      justify-content: center;
+      gap: 1.5em;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background-color: #cdbdac;
+      border: none;
+      padding: 0.8em 1.6em;
+      border-radius: 8px;
+      color: #3d352d;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #b8a692;
+    }
+
+    a {
+      color: #3d352d;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>You Are Not Alone</header>
+
+  <div class="content">
+    <p>
+      It's okay to not feel okay. If you're feeling overwhelmed, anxious, or in need of someone to talk to — please reach out. You matter, and support is just a call away.
+    </p>
+
+    <div class="helplines">
+      <h3>Helpline Numbers</h3>
+      <ul>
+        <li><strong>iCall (India):</strong> +91 9152987821</li>
+        <li><strong>Vandrevala Foundation:</strong> 1860 266 2345 / 9999 666 555</li>
+        <li><strong>AASRA:</strong> +91 98204 66726 (24/7)</li>
+        <li><strong>Suicide Prevention Helpline (India):</strong> 9152987821</li>
+        <li><strong>Visit:</strong> <a href="https://www.icallhelpline.org/" target="_blank">icallhelpline.org</a></li>
+      </ul>
+    </div>
+
+    <div class="buttons">
+      <button onclick="window.open('tel:9152987821')">Call Now</button>
+      <button onclick="goHome()">Back to Home</button>
+    </div>
+  </div>
+
+  <script>
+    function goHome() {
+      window.location.href = "home.html";
+    }
+  </script>
+
+</body>
+</html>
